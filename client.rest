@@ -11,3 +11,10 @@ Content-Type: application/json
 {
   "message": "Hello World"
 }
+###
+PATCH {{baseUrl}}/messages/1
+Content-Type: application/json
+
+{
+  "message": "Hello World"
+}
