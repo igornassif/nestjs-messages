@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
 @Controller('messages')
 export class MessagesController {
     @Get()
-    findAll(){ 
-        return 'This endpoint returns all messages';
+    findAll(@Query() pagination: any){
+        const { limit = 10, offset = 0 } = pagination;
+        return `This endpoint returns all messages. Limit: ${limit}, offset: ${offset}`;
     }
 
     @Get(':id')
