@@ -2,24 +2,30 @@
 
 # MESSAGES
 GET {{baseUrl}}/messages/
-?limit=100
-&offset=100
 ###
 GET {{baseUrl}}/messages/1/
 ###
 POST {{baseUrl}}/messages/
 Content-Type: application/json
 
-{
-  "message": "Hello World"
-}
+  {
+    "text": "New message",
+    "from": "John",
+    "to": "Doe",
+    "read": false,
+    "date": "2025-02-11T19:49:51.410Z"
+  }
 ###
 PATCH {{baseUrl}}/messages/1
 Content-Type: application/json
 
-{
-  "message": "Hello World"
-}
+  {
+    "text": "Updated message",
+    "from": "John",
+    "to": "Doe",
+    "read": false,
+    "date": "2025-02-11T19:49:51.410Z"
+  }
 ###
 DELETE  {{baseUrl}}/messages/1
 Content-Type: application/json

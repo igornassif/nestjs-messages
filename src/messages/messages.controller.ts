@@ -8,25 +8,26 @@ import {
   Param,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
+  constructor(private messagesService: MessagesService) {}
+
   @Get()
-  findAll(@Query() pagination: any) {
-    const { limit = 10, offset = 0 } = pagination;
-    return `This endpoint returns all messages. Limit: ${limit}, offset: ${offset}`;
+  findAll() {
+    return this.messagesService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `Message id: ${id}`;
+    return this.messagesService.findOne(id);
   }
 
   @Post()
   create(@Body() body: any) {
-    return body;
+    return this.messagesService.create(body);
   }
 
   @Patch(':id')
