@@ -27,5 +27,5 @@ Content-Type: application/json
     "date": "2025-02-11T19:49:51.410Z"
   }
 ###
-DELETE  {{baseUrl}}/messages/1
+DELETE  {{baseUrl}}/messages/2
 Content-Type: application/json
