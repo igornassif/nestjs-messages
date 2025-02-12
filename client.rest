@@ -3,7 +3,7 @@
 # MESSAGES
 GET {{baseUrl}}/messages/
 ###
-GET {{baseUrl}}/messages/1/
+GET {{baseUrl}}/messages/2/
 ###
 POST {{baseUrl}}/messages/
 Content-Type: application/json
@@ -16,11 +16,11 @@ Content-Type: application/json
     "date": "2025-02-11T19:49:51.410Z"
   }
 ###
-PATCH {{baseUrl}}/messages/1
+PATCH {{baseUrl}}/messages/2
 Content-Type: application/json
 
   {
-    "text": "Updated message",
+    "text": "Updated message 2",
     "from": "John",
     "to": "Doe",
     "read": false,

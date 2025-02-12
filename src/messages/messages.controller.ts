@@ -32,14 +32,11 @@ export class MessagesController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() body: any) {
-    return {
-      id,
-      ...body,
-    };
+    return this.messagesService.update(id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `Deleted message id: ${id}`;
+    this.messagesService.remove(id);
   }
 }

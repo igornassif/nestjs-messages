@@ -38,4 +38,31 @@ export class MessagesService {
 
     return newMessage;
   }
+
+  update(id: string, body: any) {
+    const messageIndex = this.messages.findIndex(
+      (message) => message.id === +id,
+    );
+
+    if (messageIndex >= 0) {
+      const existingMessage = this.messages[messageIndex];
+
+      this.messages[messageIndex] = {
+        ...existingMessage,
+        ...body,
+      };
+    }
+
+    return this.messages[messageIndex];
+  }
+
+  remove(id: string) {
+    const messageIndex = this.messages.findIndex(
+      (message) => message.id === +id,
+    );
+
+    if (messageIndex >= 0) {
+      this.messages.splice(messageIndex, 1);
+    }
+  }
 }
