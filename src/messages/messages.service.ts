@@ -2,6 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 
 @Injectable()
 export class MessagesService {
@@ -37,12 +39,15 @@ export class MessagesService {
     return message;
   }
 
-  create(body: any) {
+  create(createMessageDto: CreateMessageDto) {
     this.lastId++;
     const id = this.lastId;
+
     const newMessage = {
       id,
-      ...body,
+      ...createMessageDto,
+      read: false,
+      date: new Date(),
     };
 
     this.messages.push(newMessage);
@@ -50,7 +55,7 @@ export class MessagesService {
     return newMessage;
   }
 
-  update(id: string, body: any) {
+  update(id: string, updateMessageDto: UpdateMessageDto) {
     const messageIndex = this.messages.findIndex(
       (message) => message.id === +id,
     );
@@ -63,7 +68,7 @@ export class MessagesService {
 
     this.messages[messageIndex] = {
       ...existingMessage,
-      ...body,
+      ...updateMessageDto,
     };
 
     return this.messages[messageIndex];
