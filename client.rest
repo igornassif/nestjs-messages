@@ -11,9 +11,7 @@ Content-Type: application/json
   {
     "text": "New message",
     "from": "John",
-    "to": "Doe",
-    "read": false,
-    "date": "2025-02-11T19:49:51.410Z"
+    "to": "Doe"
   }
 ###
 PATCH {{baseUrl}}/messages/3
