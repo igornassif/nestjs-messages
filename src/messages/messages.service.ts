@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
@@ -28,8 +25,8 @@ export class MessagesService {
     return this.messages;
   }
 
-  findOne(id: string) {
-    const message = this.messages.find((message) => message.id === +id);
+  findOne(id: number) {
+    const message = this.messages.find((message) => message.id === id);
 
     if (!message) {
       // throw new HttpException('Message not found', HttpStatus.NOT_FOUND);
@@ -74,9 +71,9 @@ export class MessagesService {
     return this.messages[messageIndex];
   }
 
-  remove(id: string) {
+  remove(id: number) {
     const messageIndex = this.messages.findIndex(
-      (message) => message.id === +id,
+      (message) => message.id === id,
     );
 
     if (messageIndex < 0) {
