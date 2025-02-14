@@ -9,22 +9,19 @@ POST {{baseUrl}}/messages/
 Content-Type: application/json
 
   {
-    "text": "",
+    "text": "New message",
     "from": "John",
     "to": "Doe",
     "read": false,
     "date": "2025-02-11T19:49:51.410Z"
   }
 ###
-PATCH {{baseUrl}}/messages/2
+PATCH {{baseUrl}}/messages/3
 Content-Type: application/json
 
   {
-    "text": "Updated message 2",
-    "from": "John",
-    "to": "Doe",
-    "read": false,
-    "date": "2025-02-11T19:49:51.410Z"
+    "text": "Updated message",
+    "read": true
   }
 ###
 DELETE  {{baseUrl}}/messages/2

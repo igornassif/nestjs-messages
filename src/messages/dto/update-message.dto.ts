@@ -1,30 +1,9 @@
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateMessageDto } from './create-message.dto';
+import { IsBoolean, IsOptional } from 'class-validator';
 
-export class UpdateMessageDto {
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(255)
+export class UpdateMessageDto extends PartialType(CreateMessageDto) {
+  @IsBoolean()
   @IsOptional()
-  readonly text?: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(50)
-  @IsOptional()
-  readonly from?: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(50)
-  @IsOptional()
-  readonly to?: string;
+  readonly read?: boolean;
 }
