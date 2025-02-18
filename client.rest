@@ -3,7 +3,7 @@
 # MESSAGES
 GET {{baseUrl}}/messages/
 ###
-GET {{baseUrl}}/messages/2/
+GET {{baseUrl}}/messages/1/
 ###
 POST {{baseUrl}}/messages/
 Content-Type: application/json
