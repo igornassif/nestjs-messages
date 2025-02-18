@@ -11,7 +11,7 @@ Content-Type: application/json
   {
     "text": "New message",
     "from": "John",
-    "to": "Doe"
+    "to": "Joana"
   }
 ###
 PATCH {{baseUrl}}/messages/3

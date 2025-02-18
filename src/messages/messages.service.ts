@@ -12,19 +12,6 @@ export class MessagesService {
     private readonly messageRepository: Repository<Message>,
   ) {}
 
-  private lastId = 1;
-
-  private messages = [
-    {
-      id: 1,
-      text: 'Hello world!',
-      from: 'John',
-      to: 'Doe',
-      read: false,
-      date: new Date(),
-    },
-  ];
-
   throwNotFoundError() {
     throw new NotFoundException('Message not found');
   }
@@ -47,50 +34,55 @@ export class MessagesService {
     return message;
   }
 
-  create(createMessageDto: CreateMessageDto) {
-    this.lastId++;
-    const id = this.lastId;
-
+  async create(createMessageDto: CreateMessageDto) {
     const newMessage = {
-      id,
       ...createMessageDto,
       read: false,
       date: new Date(),
     };
 
-    this.messages.push(newMessage);
+    const message = this.messageRepository.create(newMessage);
 
-    return newMessage;
-  }
-
-  update(id: string, updateMessageDto: UpdateMessageDto) {
-    const messageIndex = this.messages.findIndex(
-      (message) => message.id === +id,
-    );
-
-    if (messageIndex < 0) {
+    if (!message) {
       this.throwNotFoundError();
     }
 
-    const existingMessage = this.messages[messageIndex];
+    await this.messageRepository.save(message);
 
-    this.messages[messageIndex] = {
-      ...existingMessage,
-      ...updateMessageDto,
+    return message;
+  }
+
+  async update(id: number, updateMessageDto: UpdateMessageDto) {
+    const partialUpdateMessageDto = {
+      read: updateMessageDto?.read,
+      text: updateMessageDto?.text,
     };
 
-    return this.messages[messageIndex];
-  }
+    const message = await this.messageRepository.preload({
+      id,
+      ...partialUpdateMessageDto,
+    });
 
-  remove(id: number) {
-    const messageIndex = this.messages.findIndex(
-      (message) => message.id === id,
-    );
-
-    if (messageIndex < 0) {
-      this.throwNotFoundError();
+    if (!message) {
+      return this.throwNotFoundError();
     }
 
-    this.messages.splice(messageIndex, 1);
+    await this.messageRepository.save(message);
+
+    return message;
+  }
+
+  async remove(id: number) {
+    const message = await this.messageRepository.findOneBy({
+      id,
+    });
+
+    if (!message) {
+      return this.throwNotFoundError();
+    }
+
+    if (message) {
+      return this.messageRepository.remove(message);
+    }
   }
 }
