@@ -24,3 +24,18 @@ Content-Type: application/json
 ###
 DELETE  {{baseUrl}}/messages/2
 Content-Type: application/json
+###
+
+# PERSONS
+GET {{baseUrl}}/persons/
+###
+GET {{baseUrl}}/persons/1/
+###
+POST {{baseUrl}}/persons/
+Content-Type: application/json
+
+  {
+    "email": "email2@email.com",
+    "password": "password",
+    "name": "John2"
+  }
