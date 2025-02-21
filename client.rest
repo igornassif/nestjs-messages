@@ -34,11 +34,19 @@ GET {{baseUrl}}/persons/1/
 POST {{baseUrl}}/persons/
 Content-Type: application/json
 
-  {
-    "email": "email4@email.com",
-    "password": "password",
-    "name": "John2"
-  }
+{
+  "email": "email4@email.com",
+  "password": "password",
+  "name": "John2"
+}
+###
+PATCH {{baseUrl}}/persons/5
+Content-Type: application/json
+
+{
+  "password": "123456789",
+  "name": "John Doe"
+}
 ###
 DELETE  {{baseUrl}}/persons/11
 Content-Type: application/json
