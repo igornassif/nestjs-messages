@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Person } from './entities/person.entity';
 
@@ -24,7 +24,10 @@ export class PersonsService {
       await this.personRepository.save(newPerson);
       return newPerson;
     } catch (error) {
-      if (error.code === '23505') {
+      if (
+        error instanceof QueryFailedError &&
+        (error as QueryFailedError & { code: string }).code === '23505'
+      ) {
         throw new ConflictException('Email already in use');
       }
 
