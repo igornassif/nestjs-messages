@@ -81,8 +81,6 @@ export class MessagesService {
       return this.throwNotFoundError();
     }
 
-    if (message) {
-      return this.messageRepository.remove(message);
-    }
+    return await this.messageRepository.remove(message);
   }
 }

@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { PersonsService } from './persons.service';
 import { CreatePersonDto } from './dto/create-person.dto';
@@ -36,6 +38,7 @@ export class PersonsController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.personsService.remove(+id);
   }

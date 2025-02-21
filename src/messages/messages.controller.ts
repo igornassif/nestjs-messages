@@ -7,6 +7,8 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -40,6 +42,7 @@ export class MessagesController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.messagesService.remove(id);
   }
