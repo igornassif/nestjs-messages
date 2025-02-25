@@ -3,15 +3,15 @@
 # MESSAGES
 GET {{baseUrl}}/messages/
 ###
-GET {{baseUrl}}/messages/1/
+GET {{baseUrl}}/messages/7/
 ###
 POST {{baseUrl}}/messages/
 Content-Type: application/json
 
   {
     "text": "New message",
-    "from": "John",
-    "to": "Joana"
+    "fromId": 1,
+    "toId": 5
   }
 ###
 PATCH {{baseUrl}}/messages/3
