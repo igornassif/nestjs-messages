@@ -11,7 +11,7 @@ Content-Type: application/json
   {
     "text": "New message",
     "fromId": 1,
-    "toId": 5
+    "toId": 12
   }
 ###
 PATCH {{baseUrl}}/messages/3
@@ -35,9 +35,9 @@ POST {{baseUrl}}/persons/
 Content-Type: application/json
 
 {
-  "email": "email4@email.com",
+  "email": "email5@email.com",
   "password": "password",
-  "name": "John2"
+  "name": "John New"
 }
 ###
 PATCH {{baseUrl}}/persons/5
@@ -48,5 +48,5 @@ Content-Type: application/json
   "name": "John Doe"
 }
 ###
-DELETE  {{baseUrl}}/persons/11
+DELETE  {{baseUrl}}/persons/12
 Content-Type: application/json
