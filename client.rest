@@ -14,7 +14,7 @@ Content-Type: application/json
     "toId": 12
   }
 ###
-PATCH {{baseUrl}}/messages/3
+PATCH {{baseUrl}}/messages/7
 Content-Type: application/json
 
   {

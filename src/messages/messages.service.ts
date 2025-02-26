@@ -52,12 +52,9 @@ export class MessagesService {
       },
     });
 
-    if (!message) {
-      // throw new HttpException('Message not found', HttpStatus.NOT_FOUND);
-      this.throwNotFoundError();
-    }
+    if (message) return message;
 
-    return message;
+    this.throwNotFoundError();
   }
 
   async create(createMessageDto: CreateMessageDto) {
@@ -92,21 +89,12 @@ export class MessagesService {
   }
 
   async update(id: number, updateMessageDto: UpdateMessageDto) {
-    const partialUpdateMessageDto = {
-      read: updateMessageDto?.read,
-      text: updateMessageDto?.text,
-    };
+    const message = await this.findOne(id);
 
-    const message = await this.messageRepository.preload({
-      id,
-      ...partialUpdateMessageDto,
-    });
+    message!.text = updateMessageDto?.text ?? message!.text;
+    message!.read = updateMessageDto?.read ?? message!.read;
 
-    if (!message) {
-      return this.throwNotFoundError();
-    }
-
-    await this.messageRepository.save(message);
+    await this.messageRepository.save(message!);
 
     return message;
   }
