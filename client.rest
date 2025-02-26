@@ -2,8 +2,8 @@
 
 # MESSAGES
 GET {{baseUrl}}/messages/
-?limit=2
-&offset=1
+?limit=10
+&offset=0
 ###
 GET {{baseUrl}}/messages/7/
 ###
