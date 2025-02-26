@@ -9,18 +9,20 @@ import {
   Post,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller('messages')
 export class MessagesController {
   constructor(private messagesService: MessagesService) {}
 
   @Get()
-  async findAll() {
-    return await this.messagesService.findAll();
+  async findAll(@Query() paginationDto: PaginationDto) {
+    return await this.messagesService.findAll(paginationDto);
   }
 
   @Get(':id')
