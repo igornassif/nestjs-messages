@@ -19,6 +19,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
+import { TimmingConnectionInterceptor } from 'src/common/interceptors/timming-connection.interceptor';
 
 @Controller('messages')
 @UsePipes(ParseIntIdPipe)
@@ -26,6 +27,8 @@ import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interce
 export class MessagesController {
   constructor(private messagesService: MessagesService) {}
 
+  @UseInterceptors(TimmingConnectionInterceptor)
+  @HttpCode(HttpStatus.OK)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto) {
     return await this.messagesService.findAll(paginationDto);
