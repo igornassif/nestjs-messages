@@ -57,9 +57,12 @@ export class MessagesService {
       },
     });
 
-    if (message) return message;
+    if (!message) {
+      throw new NotFoundException('Message not found');
+      //this.throwNotFoundError();
+    }
 
-    this.throwNotFoundError();
+    return message;
   }
 
   async create(createMessageDto: CreateMessageDto) {
@@ -96,10 +99,10 @@ export class MessagesService {
   async update(id: number, updateMessageDto: UpdateMessageDto) {
     const message = await this.findOne(id);
 
-    message!.text = updateMessageDto?.text ?? message!.text;
-    message!.read = updateMessageDto?.read ?? message!.read;
+    message.text = updateMessageDto?.text ?? message.text;
+    message.read = updateMessageDto?.read ?? message.read;
 
-    await this.messageRepository.save(message!);
+    await this.messageRepository.save(message);
 
     return message;
   }
