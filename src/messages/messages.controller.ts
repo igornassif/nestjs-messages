@@ -20,10 +20,11 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { TimmingConnectionInterceptor } from 'src/common/interceptors/timming-connection.interceptor';
+// import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
 
 @Controller('messages')
 @UsePipes(ParseIntIdPipe)
-@UseInterceptors(AddHeaderInterceptor)
+@UseInterceptors(AddHeaderInterceptor) //ErrorHandlingInterceptor
 export class MessagesController {
   constructor(private messagesService: MessagesService) {}
 
