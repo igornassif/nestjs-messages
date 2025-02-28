@@ -4,6 +4,7 @@
 GET {{baseUrl}}/messages/
 ?limit=10
 &offset=0
+Authorization: Bearer token
 ###
 GET {{baseUrl}}/messages/7/
 ###

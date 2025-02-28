@@ -16,15 +16,13 @@ import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { TimmingConnectionInterceptor } from 'src/common/interceptors/timming-connection.interceptor';
+import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 
 @Controller('messages')
-//@UsePipes(ParseIntIdPipe)
-//@UseInterceptors(AddHeaderInterceptor, SimpleCacheInterceptor) //ErrorHandlingInterceptor
 export class MessagesController {
   constructor(private messagesService: MessagesService) {}
 
-  @UseInterceptors(TimmingConnectionInterceptor)
+  @UseInterceptors(AuthTokenInterceptor)
   @HttpCode(HttpStatus.OK)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto) {
