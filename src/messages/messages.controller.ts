@@ -11,6 +11,7 @@ import {
   HttpStatus,
   Query,
   UseInterceptors,
+  BadRequestException,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -26,7 +27,10 @@ export class MessagesController {
   @HttpCode(HttpStatus.OK)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto) {
-    return await this.messagesService.findAll(paginationDto);
+    const recados = await this.messagesService.findAll(paginationDto);
+
+    throw new BadRequestException(
+      'This is a custom error message for demonstration purposes.');
   }
 
   @Get(':id')
